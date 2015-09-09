@@ -50,27 +50,31 @@ Meteor.methods({
       { _id: 1 },
       { cards: deck }
     );
+  },
+  resetGame: function() {
+    Hand.update(
+      { _id: 1 },
+      { cards: [], sum: 0, ace: false },
+      { upsert: true }
+    );
+
+    var cards = [];
+    var suits = ['D', 'C', 'H', 'S'];
+    for (s = 0; s < 4; s++) {
+      for (n = 1; n < 14; n++) {
+        cards.push({ suit: suits[s], number: n });
+      }
+    }
+    Deck.update(
+      { _id: 1 }, 
+      { cards: cards }, 
+      { upsert: true }
+    );
+
+    Meteor.call('shuffle');
   }
 });
 
 Hand = new Mongo.Collection('Hand');
-Hand.update(
-  { _id: 1 },
-  { cards: [], sum: 0, ace: false },
-  { upsert: true }
-);
-
 Deck = new Mongo.Collection('Deck');
-var cards = [];
-var suits = ['D', 'C', 'H', 'S'];
-for (s = 0; s < 4; s++) {
-  for (n = 1; n < 14; n++) {
-    cards.push({ suit: suits[s], number: n });
-  }
-}
-Deck.update(
-  { _id: 1 }, 
-  { cards: cards }, 
-  { upsert: true }
-);
-Meteor.call('shuffle');
+Meteor.call('resetGame');
