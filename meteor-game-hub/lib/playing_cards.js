@@ -1,8 +1,8 @@
 // Back End Functions for Playing Cards
 
 Meteor.methods({
-  shuffle: function() {
-    var deck = Deck.findOne().cards;
+  shuffle: function(room_id) {
+    var deck = Rooms.findOne({ room: room_id }).cards;
     var counter = deck.length, temp, index;
     while (counter > 0) {
       index = Math.floor(Math.random() * counter);
@@ -12,12 +12,12 @@ Meteor.methods({
       deck[index] = temp;
     }
 
-    Deck.update(
-      { _id: 1 },
-      { cards: deck }
+    Rooms.update(
+      { room: room_id },
+      { $set: { cards: deck } }
     );
   },
-  resetDeck: function() {
+  resetDeck: function(room_id) {
     var cards = [];
     var suits = ['D', 'C', 'H', 'S'];
     for (s = 0; s < 4; s++) {
@@ -25,16 +25,15 @@ Meteor.methods({
         cards.push({ suit: suits[s], number: n });
       }
     }
-    Deck.update(
-      { _id: 1 }, 
-      { cards: cards }, 
-      { upsert: true }
+
+    Rooms.update(
+      { room: room_id }, 
+      { $set: { cards: cards } }
     );
 
-    Meteor.call('shuffle');
+    Meteor.call('shuffle', room_id);
   }
 });
 
-// initialize deck on page load
-Deck = new Mongo.Collection('Deck');
-Meteor.call('resetDeck');
+// Deck = new Mongo.Collection('Deck');
+Rooms = new Mongo.Collection('Rooms')

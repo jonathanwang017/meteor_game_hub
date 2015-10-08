@@ -3,8 +3,38 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> blackjack}}
+  <div class="content">
+    {{#unless gameStarted}}
+      {{#unless role}}
+        {{> role_select}}
+      {{else}}
+        <!-- host screens -->
+        {{#if host}}
+          {{#if game}}
+            {{> host_lobby}}
+          {{else}}
+            {{> game_select}}
+          {{/if}}
+        {{/if}}
+        <!-- player screens -->
+        {{#if player}}
+          {{#unless joinedRoom}}
+            {{> player_lobby}}
+          {{else}}
+            {{> player_waiting}}
+          {{/unless}}
+        {{/if}}
+      {{/unless}}
+    {{else}}
+      {{#if host}}
+        {{> blackjack_host}}
+      {{/if}}
+      {{#if player}}
+        {{#if rendered}}
+          {{> blackjack_player}}
+        {{/if}}
+      {{/if}}
+    {{/unless}}
+  </div>
 </body>
 

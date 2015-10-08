@@ -1,0 +1,27 @@
+.center_div {
+  text-align: center;
+}
+
+.top_padding {
+  padding-top: 20%;
+}
+
+.game_button {
+  font-size: 18px;
+  margin: 10px;
+  padding: 8px;
+  background-color: #996633;
+}
+
+.game_label {
+  font-size: 18px;
+}
+
+.game_input {
+  font-size: 18px;
+  width: 300px;
+}
+
+.text_input_div {
+  padding: 10px;
+}

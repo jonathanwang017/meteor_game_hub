@@ -1,0 +1,62 @@
+<template name="role_select">
+  <div class="center_div">
+    <div class="top_padding">
+      <button id="host_button" class="game_button">Host Room</button>
+      <button id="player_button" class="game_button">Join Room</button>
+    </div>
+  </div>
+</template>
+
+<template name="game_select">
+  <div class="center_div">
+    <h1>Select a Game</h1>
+    <div>
+      <button id="blackjack_button" class="game_button">Blackjack</button>
+    </div>
+    <div>
+      <button id="game_cancel_button" class="game_button">Back</button>
+    </div>
+  </div>
+</template>
+
+<template name="host_lobby">
+  <div class="center_div">
+    <h1>Room ID: {{room_id}}</h1>
+    <h2>Players in Room</h2>
+    {{#each player_list}}
+      <h4>{{player_name}}</h4>
+    {{/each}}
+    <div>
+      <button id="start_button" class="game_button">Start</button>
+      <button id="host_cancel_button" class="game_button">Cancel</button>
+    </div>
+  </div>
+</template>
+
+<template name="player_lobby">
+  <div class="center_div">
+    <div class="top_padding">
+      <div class="text_input_div">
+        <label class="game_label">Room ID:</label>
+        <input type="text" id="room_id_text" class="game_input" placeholder="Enter Room ID" />
+      </div>
+      <div class="text_input_div">
+        <label class="game_label">Name:</label>
+        <input type="text" id="name_text" class="game_input" placeholder="Enter Name" />
+      </div>
+      <div>
+        <button id="join_button" class="game_button">Join</button>
+        <button id="player_cancel_button" class="game_button">Cancel</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="player_waiting">
+  <div class="center_div">
+    <div class="top_padding">
+      <h1>Joined Room</h1>
+      <h4>Waiting for room to start</h4>
+    </div>
+  </div>
+</template>

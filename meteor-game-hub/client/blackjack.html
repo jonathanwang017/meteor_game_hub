@@ -1,47 +1,33 @@
-<template name="blackjack">
-  <h1>Blackjack</h1>
-  <div style="height:80px;">
-    <h3>Score: <span id="card_score">0</span></h3>
-    <h3 id="hand_status"></h3>
+<template name="blackjack_host">
+  <div class="center_div">
+    <div class="top_padding">
+      <h1>Blackjack</h1>
+      <h4>Cards in Deck: {{cardCount}}</h4>
+      <h4>Turn: {{playerTurn}}</h4>
+    </div>
   </div>
-  <table style="height:120px;">
-    <tr>
-      <td>
-        <img id="card0">
-      </td>
-      <td>
-        <img id="card1">
-      </td>
-      <td>
-        <img id="card2">
-      </td>
-      <td>
-        <img id="card3">
-      </td>
-      <td>
-        <img id="card4">
-      </td>
-      <td>
-        <img id="card5">
-      </td>
-      <td>
-        <img id="card6">
-      </td>
-      <td>
-        <img id="card7">
-      </td>
-      <td>
-        <img id="card8">
-      </td>
-      <td>
-        <img id="card9">
-      </td>
-    </tr>
-  </table>
-  <div>
-    <button id="deal_button">Deal</button>
-    <button id="hit_button" disabled>Hit</button>
-    <button id="stay_button" disabled>Stay</button>
-    <button id="reset_button" disabled>Reset</button>
+</template>
+
+<template name="blackjack_player">
+  <div class="center_div">
+    <h1>Blackjack</h1>
+    <div>
+      <h3>{{playerTurn}} turn</h3>
+      <h3>{{playerName}}</h3>
+      <h3>Score: {{cardScore}}</h3>
+    </div>
+    <table class="card_table">
+      <tr>
+        {{#each handCards}}
+          <td>
+            <img src="{{card}}" />
+          </td>
+        {{/each}}
+      </tr>
+    </table>
+    <div>
+      <button id="hit_button" disabled="{{disableAction}}">Hit</button>
+      <button id="stay_button" disabled="{{disableAction}}">Stay</button>
+    </div>
   </div>
 </template>
