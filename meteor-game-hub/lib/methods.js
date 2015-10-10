@@ -5,7 +5,7 @@ Meteor.methods({
   createRoom: function(room_id, game) {
     Rooms.update(
       { room: room_id }, 
-      { room: room_id, game: game, players: [], game_over: [], all_game_over: false, active: false }, 
+      { room: room_id, game: game, players: [], game_over: [], all_game_over: false, active: false, winner: 'None' }, 
       { upsert: true }
     );
   },
@@ -54,7 +54,7 @@ Meteor.methods({
       }
       Rooms.update(
         { room: room_id },
-        { $set: { game_over: gameOver, turn: 0, all_game_over: false } }
+        { $set: { game_over: gameOver, turn: 0, all_game_over: false, winner: 'None' } }
       );
       for (i = 0; i < players.length; i++) {
         Meteor.call('deal', players[i], room_id);

@@ -30,10 +30,20 @@ Template.blackjack_host.helpers({
     if (Session.get('room_id')) {
       var room = Rooms.findOne({ room: Session.get('room_id') });
       if (room) {
-        return !room.all_game_over;
+        if (room.all_game_over) {
+          Meteor.call('findWinner', Session.get('room_id'));
+          return false;
+        }
       }
     }
     return true;
+  },
+  // return winner or none
+  gameWinner: function() {
+    var room = Rooms.findOne({ room: Session.get('room_id') });
+    if (room) {
+      return room.winner;
+    }
   }
 });
 
@@ -58,7 +68,7 @@ Template.blackjack_player.helpers({
   // return score of player hand
   cardScore: function() {
     var player = Players.findOne({ player: Session.get('player_id') });
-    score = getScore(player);
+    var score = player.score;
     if (score > 21) {
       Meteor.call('endGame', Session.get('room_id'), Session.get('player_id'));
       return 'Bust!';
@@ -132,15 +142,6 @@ Template.blackjack_player.events({
     Meteor.call('incrementTurn', Session.get('room_id'));
   },
 });
-
-// calculate max score (ace as 1 or 11)
-function getScore(player) {
-  var score = player.sum;
-  if (player.ace && (player.sum + 10 <= 21)) {
-    score = player.sum + 10;
-  }
-  return score;
-}
 
 Template.blackjack_spectator.helpers({
   // return number of cards in deck

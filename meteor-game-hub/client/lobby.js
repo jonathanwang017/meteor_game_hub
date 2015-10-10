@@ -25,7 +25,7 @@ Template.game_select.events({
 
 Template.host_lobby.rendered = function() {
   // create room with random id
-  Session.set('room_id', Random.id());
+  Session.set('room_id', Random.id(4));
   Meteor.call('createRoom', Session.get('room_id'), Session.get('game'));
 }
 
