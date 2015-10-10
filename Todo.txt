@@ -1,0 +1,4 @@
+Add points/rounds
+Fix blackjack flow
+Clean up css
+Consider storing game_over in player

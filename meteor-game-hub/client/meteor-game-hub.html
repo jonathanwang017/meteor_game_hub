@@ -24,15 +24,29 @@
             {{> player_waiting}}
           {{/unless}}
         {{/if}}
+        <!-- spectator screens -->
+        {{#if spectator}}
+          {{#unless joinedRoom}}
+            {{> spectator_lobby}}
+          {{else}}
+            {{> spectator_waiting}}
+          {{/unless}}
+        {{/if}}
       {{/unless}}
     {{else}}
+      <!-- host screens -->
       {{#if host}}
         {{> blackjack_host}}
       {{/if}}
+      <!-- player screens -->
       {{#if player}}
         {{#if rendered}}
           {{> blackjack_player}}
         {{/if}}
+      {{/if}}
+      <!-- spectator screens -->
+      {{#if spectator}}
+        {{> blackjack_spectator}}
       {{/if}}
     {{/unless}}
   </div>

@@ -3,6 +3,7 @@
     <div class="top_padding">
       <button id="host_button" class="game_button">Host Room</button>
       <button id="player_button" class="game_button">Join Room</button>
+      <button id="spectator_button" class="game_button">Spectate Room</button>
     </div>
   </div>
 </template>
@@ -45,7 +46,7 @@
         <input type="text" id="name_text" class="game_input" placeholder="Enter Name" />
       </div>
       <div>
-        <button id="join_button" class="game_button">Join</button>
+        <button id="player_join_button" class="game_button">Join</button>
         <button id="player_cancel_button" class="game_button">Cancel</button>
       </div>
     </div>
@@ -56,6 +57,30 @@
   <div class="center_div">
     <div class="top_padding">
       <h1>Joined Room</h1>
+      <h4>Waiting for room to start</h4>
+    </div>
+  </div>
+</template>
+
+<template name="spectator_lobby">
+  <div class="center_div">
+    <div class="top_padding">
+      <div class="text_input_div">
+        <label class="game_label">Room ID:</label>
+        <input type="text" id="room_id_text" class="game_input" placeholder="Enter Room ID" />
+      </div>
+      <div>
+        <button id="spectator_join_button" class="game_button">Join</button>
+        <button id="spectator_cancel_button" class="game_button">Cancel</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="spectator_waiting">
+  <div class="center_div">
+    <div class="top_padding">
+      <h1>Spectating Room</h1>
       <h4>Waiting for room to start</h4>
     </div>
   </div>

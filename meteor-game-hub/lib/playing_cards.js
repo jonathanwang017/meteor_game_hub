@@ -1,6 +1,7 @@
 // Back End Functions for Playing Cards
 
 Meteor.methods({
+  // shuffle cards in a room
   shuffle: function(room_id) {
     var deck = Rooms.findOne({ room: room_id }).cards;
     var counter = deck.length, temp, index;
@@ -17,6 +18,7 @@ Meteor.methods({
       { $set: { cards: deck } }
     );
   },
+  // add cards to room
   resetDeck: function(room_id) {
     var cards = [];
     var suits = ['D', 'C', 'H', 'S'];

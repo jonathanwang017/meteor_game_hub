@@ -4,6 +4,7 @@
       <h1>Blackjack</h1>
       <h4>Cards in Deck: {{cardCount}}</h4>
       <h4>Turn: {{playerTurn}}</h4>
+      <button id="reset_button" disabled="{{gameOver}}">Reset</button>
     </div>
   </div>
 </template>
@@ -12,7 +13,7 @@
   <div class="center_div">
     <h1>Blackjack</h1>
     <div>
-      <h3>{{playerTurn}} turn</h3>
+      <h3>{{playerTurn}}</h3>
       <h3>{{playerName}}</h3>
       <h3>Score: {{cardScore}}</h3>
     </div>
@@ -28,6 +29,16 @@
     <div>
       <button id="hit_button" disabled="{{disableAction}}">Hit</button>
       <button id="stay_button" disabled="{{disableAction}}">Stay</button>
+    </div>
+  </div>
+</template>
+
+<template name="blackjack_spectator">
+  <div class="center_div">
+    <div class="top_padding">
+      <h1>Blackjack</h1>
+      <h4>Cards in Deck: {{cardCount}}</h4>
+      <h4>Turn: {{playerTurn}}</h4>
     </div>
   </div>
 </template>
