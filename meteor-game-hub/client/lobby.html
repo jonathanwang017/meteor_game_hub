@@ -22,9 +22,9 @@
 
 <template name="host_lobby">
   <div class="center_div">
-    <h1>Room ID: {{room_id}}</h1>
+    <h1>Room ID: {{roomId}}</h1>
     <h2>Players in Room</h2>
-    {{#each player_list}}
+    {{#each playerList}}
       <h4>{{player_name}}</h4>
     {{/each}}
     <div>
@@ -37,9 +37,12 @@
 <template name="player_lobby">
   <div class="center_div">
     <div class="top_padding">
+      <div>
+        <h3>{{errorMessage}}</h3>
+      </div>
       <div class="text_input_div">
         <label class="game_label">Room ID:</label>
-        <input type="text" id="room_id_text" class="game_input" placeholder="Enter Room ID" />
+        <input type="text" id="room_id_text" class="game_input" autocapitalize="off" autocorrect="off" placeholder="Enter Room ID" />
       </div>
       <div class="text_input_div">
         <label class="game_label">Name:</label>
@@ -65,9 +68,12 @@
 <template name="spectator_lobby">
   <div class="center_div">
     <div class="top_padding">
+      <div>
+        <h3>{{errorMessage}}</h3>
+      </div>
       <div class="text_input_div">
         <label class="game_label">Room ID:</label>
-        <input type="text" id="room_id_text" class="game_input" placeholder="Enter Room ID" />
+        <input type="text" id="room_id_text" class="game_input" autocapitalize="off" autocorrect="off" placeholder="Enter Room ID" />
       </div>
       <div>
         <button id="spectator_join_button" class="game_button">Join</button>

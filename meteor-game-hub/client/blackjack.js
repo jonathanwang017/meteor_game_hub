@@ -1,6 +1,30 @@
 // Front End Functions for Blackjack Module
 
 Template.blackjack_host.helpers({
+  // return list of players with hands
+  playerList: function() {
+    var room = Rooms.findOne({ room: Session.get('room_id') });
+    var player_hands = [];
+    if (room) {
+      var players = room.players;
+      for (i = 0; i < players.length; i++) {
+        var player_id = players[i];
+        var player = Players.findOne({ player: player_id });
+        var cards = [];
+        if (player.cards) {
+          for (j = 0; j < player.cards.length; j++) {
+            if (j == 0) {
+              cards.push({ card: 'classic-cards/card_back.png' });
+            } else {
+              cards.push({ card: 'classic-cards/' + player.cards[j].suit + player.cards[j].number + '.png' });
+            }
+          }
+        }
+        player_hands.push({ name: player.name, hand: cards });
+      }
+    }
+    return player_hands;
+  },
   // return number of cards in deck
   cardCount: function() {
     var room = Rooms.findOne({ room: Session.get('room_id') });
@@ -8,6 +32,13 @@ Template.blackjack_host.helpers({
       if (room.cards) {
         return room.cards.length;
       }
+    }
+  },
+  // return chips in pool
+  chipCount: function() {
+    var room = Rooms.findOne({ room: Session.get('room_id') });
+    if (room) {
+      return room.pool
     }
   },
   // return whose turn or game over for all players
@@ -71,13 +102,23 @@ Template.blackjack_player.helpers({
     var score = player.score;
     if (score > 21) {
       Meteor.call('endGame', Session.get('room_id'), Session.get('player_id'));
+      Meteor.call('incrementTurn', Session.get('room_id'));
       return 'Bust!';
     }
     else if (score == 21) {
       Meteor.call('endGame', Session.get('room_id'), Session.get('player_id'));
+      Meteor.call('incrementTurn', Session.get('room_id'));
       return 'Blackjack!';
     }
     return score;
+  },
+  // return player chips or remove player if no chips
+  chipCount: function() {
+    var player = Players.findOne({ player: Session.get('player_id') });
+    if (player.eliminated) {
+      Session.set('role', 'spectator');
+    }
+    return player.chips;
   },
   // return list of cards in player hand
   handCards: function() {
@@ -153,6 +194,13 @@ Template.blackjack_spectator.helpers({
       }
     }
   },
+  // return chips in pool
+  chipCount: function() {
+    var room = Rooms.findOne({ room: Session.get('room_id') });
+    if (room) {
+      return room.pool
+    }
+  },
   // return whose turn or game over for all players
   playerTurn: function() {
     var room = Rooms.findOne({ room: Session.get('room_id') });
@@ -166,6 +214,13 @@ Template.blackjack_spectator.helpers({
       if (player) {
         return player.name;
       }
+    }
+  },
+  // return winner or none
+  gameWinner: function() {
+    var room = Rooms.findOne({ room: Session.get('room_id') });
+    if (room) {
+      return room.winner;
     }
   }
 });

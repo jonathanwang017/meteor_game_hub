@@ -1,9 +1,7 @@
-> Add points/rounds
 > Fix blackjack flow
 > Clean up css
-> Simplify room id
-> Show part of player's hand on host
-> Set player to spectator after no money
 
 ? Consider storing game_over in player
 ? Reorganize templates
+? Add rules for ante and raise
+? Transition after everyone out of money

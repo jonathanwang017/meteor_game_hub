@@ -1,12 +1,27 @@
 <template name="blackjack_host">
   <div class="center_div">
-    <div class="top_padding">
-      <h1>Blackjack</h1>
-      <h4>Cards in Deck: {{cardCount}}</h4>
-      <h4>Turn: {{playerTurn}}</h4>
-      <h4>Winner: {{gameWinner}}</h4>
-      <button id="reset_button" disabled="{{gameOver}}">Reset</button>
+    <h1>Blackjack</h1>
+    <h4>Cards in Deck: {{cardCount}}</h4>
+    <h4>Pool: {{chipCount}}</h4>
+    <h4>Turn: {{playerTurn}}</h4>
+    <h4>Winner: {{gameWinner}}</h4>
+    <div>
+      {{#each playerList}}
+        <div class="inline_div">
+          <h4>{{name}}</h4>
+          <table class="card_table">
+            <tr>
+              {{#each hand}}
+                <td>
+                  <img src="{{card}}" />
+                </td>
+              {{/each}}
+            </tr>
+          </table>
+        </div>
+      {{/each}}
     </div>
+    <button id="reset_button" disabled="{{gameOver}}">Reset</button>
   </div>
 </template>
 
@@ -16,6 +31,7 @@
     <div>
       <h3>{{playerTurn}}</h3>
       <h3>{{playerName}}</h3>
+      <h3>Chips: {{chipCount}}</h3>
       <h3>Score: {{cardScore}}</h3>
     </div>
     <table class="card_table">
@@ -36,11 +52,26 @@
 
 <template name="blackjack_spectator">
   <div class="center_div">
-    <div class="top_padding">
-      <h1>Blackjack</h1>
-      <h4>Cards in Deck: {{cardCount}}</h4>
-      <h4>Turn: {{playerTurn}}</h4>
-      <h4>Winner: {{gameWinner}}</h4>
+    <h1>Blackjack</h1>
+    <h4>Cards in Deck: {{cardCount}}</h4>
+    <h4>Pool: {{chipCount}}</h4>
+    <h4>Turn: {{playerTurn}}</h4>
+    <h4>Winner: {{gameWinner}}</h4>
+    <div>
+      {{#each playerList}}
+        <div class="inline_div">
+          <h4>{{name}}</h4>
+          <table class="card_table">
+            <tr>
+              {{#each hand}}
+                <td>
+                  <img src="{{card}}" />
+                </td>
+              {{/each}}
+            </tr>
+          </table>
+        </div>
+      {{/each}}
     </div>
   </div>
 </template>

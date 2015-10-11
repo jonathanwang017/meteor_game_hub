@@ -31,11 +31,11 @@ Template.host_lobby.rendered = function() {
 
 Template.host_lobby.helpers({
   // return room id
-  room_id: function() {
+  roomId: function() {
     return Session.get('room_id');
   },
   // return list of player names in room
-  player_list: function() {
+  playerList: function() {
     player_list = []
     room = Rooms.findOne({ room: Session.get('room_id') });
     if (room) {
@@ -65,6 +65,13 @@ Template.player_lobby.rendered = function() {
   Session.set('player_id', Random.id());
 }
 
+Template.player_lobby.helpers({
+  // return any error messages
+  errorMessage: function() {
+    return Session.get('err_msg');
+  }
+});
+
 Template.player_lobby.events({
   // create player if room exists
   'click #player_join_button': function() {
@@ -72,11 +79,18 @@ Template.player_lobby.events({
     var room = Rooms.findOne({ room: join_id });
     if (room) {
       if (!room.active) {
-        Session.set('room_id', join_id);
+        if ($('#name_text').val() != '') {
+          Session.set('room_id', join_id);
+        } else {
+          Session.set('err_msg', 'Enter name');
+          console.log('Enter name');
+        }
       } else {
+        Session.set('err_msg', 'Room already started');
         console.log('Room already started');
       }
     } else {
+      Session.set('err_msg', 'Room does not exist');
       console.log('Room does not exist');
     }
 
@@ -86,7 +100,15 @@ Template.player_lobby.events({
     Meteor.call('addPlayer', Session.get('room_id'), Session.get('player_id'));
   },
   'click #player_cancel_button': function() {
+    Session.set('err_msg', undefined);
     Session.set('role', undefined);
+  }
+});
+
+Template.spectator_lobby.helpers({
+  // return any error messages
+  errorMessage: function() {
+    return Session.get('err_msg');
   }
 });
 
@@ -97,6 +119,7 @@ Template.spectator_lobby.events({
     if (room) {
       Session.set('room_id', join_id);
     } else {
+      Session.set('err_msg', 'Room does not exist');
       console.log('Room does not exist');
     }
   },
