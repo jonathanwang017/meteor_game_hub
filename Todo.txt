@@ -1,6 +1,8 @@
 > Fix blackjack flow
 > Clean up css
 
+* Room does not exist sometimes
+
 ? Consider storing game_over in player
 ? Reorganize templates
 ? Add rules for ante and raise

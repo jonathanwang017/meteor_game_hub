@@ -5,7 +5,7 @@ Meteor.methods({
   createRoom: function(room_id, game) {
     Rooms.update(
       { room: room_id }, 
-      { room: room_id, game: game, players: [], active: false }, 
+      { room: room_id, game: game, players: [], active: false, game_over: [], all_game_over: false, winner: 'None', pool: 0 }, 
       { upsert: true }
     );
   },
@@ -29,7 +29,7 @@ Meteor.methods({
     Meteor.call('resetDeck', room_id);
     Rooms.update(
       { room: room_id }, 
-      { $set: { active: true, turn: 0, game_over: [], all_game_over: false, winner: 'None', pool: 0 } }
+      { $set: { active: true, turn: 0 } }
     );
   },
   // reset hands for all players in room
