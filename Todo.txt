@@ -1,5 +1,6 @@
 > Fix blackjack flow
 > Clean up css
+> Handle ties
 
 * Room does not exist sometimes
 
