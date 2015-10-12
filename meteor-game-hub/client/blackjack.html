@@ -21,7 +21,7 @@
         </div>
       {{/each}}
     </div>
-    <button id="reset_button" disabled="{{gameOver}}">Reset</button>
+    <button id="reset_button" class="game_button" disabled="{{gameOver}}">Reset</button>
   </div>
 </template>
 
@@ -29,10 +29,10 @@
   <div class="center_div">
     <h1>Blackjack</h1>
     <div>
-      <h3>{{playerTurn}}</h3>
-      <h3>{{playerName}}</h3>
-      <h3>Chips: {{chipCount}}</h3>
-      <h3>Score: {{cardScore}}</h3>
+      <h4>{{playerTurn}}</h4>
+      <h4>{{playerName}}</h4>
+      <h4>Chips: {{chipCount}}</h4>
+      <h4>Score: {{cardScore}}</h4>
     </div>
     <table class="card_table">
       <tr>
@@ -44,8 +44,8 @@
       </tr>
     </table>
     <div>
-      <button id="hit_button" disabled="{{disableAction}}">Hit</button>
-      <button id="stay_button" disabled="{{disableAction}}">Stay</button>
+      <button id="hit_button" class="game_button" disabled="{{disableAction}}">Hit</button>
+      <button id="stay_button" class="game_button" disabled="{{disableAction}}">Stay</button>
     </div>
   </div>
 </template>

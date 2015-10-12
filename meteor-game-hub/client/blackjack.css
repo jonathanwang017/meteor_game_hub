@@ -10,6 +10,17 @@
   padding-top: 20%;
 }
 
+.game_button {
+  font-size: 18px;
+  margin: 10px;
+  padding: 8px;
+  background-color: #996633;
+}
+
+.game_button:disabled {
+  background-color: #CCB299;
+}
+
 .card_table {
   height: 120px;
   margin: auto;
